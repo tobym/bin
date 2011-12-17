@@ -1,0 +1,36 @@
+#!/bin/sh
+
+#
+# Description:
+#
+#   Append stdin to pasteboard.
+#
+# Usage:
+#
+#   $ echo "hello " | pbcopy && echo world | ./pbappend
+#   $ pbpaste
+#   hello world
+#   
+#   $ pwd
+#   /Users/toby/
+#   $ pwd | pbcopy
+#   $ pbpaste
+#   /Users/toby/
+#   $ ls foo.txt | pbappend
+#   $ pbpaste
+#   /Users/toby/foo.txt
+#
+# More Description:
+#
+#   `pbcopy` copies things from stdin to Mac OS X pasteboard.
+#   `pbpaste` prints things from pasteboard to stdout.
+#
+#   This script, `pbappend`, appends stdin to the existing content in the
+#   pasteboard.
+#
+#   Make this file executable (`chmod a+x pbappend`) and put it in your $PATH.
+#
+
+orig=`pbpaste`
+read next
+echo $orig$next | pbcopy
